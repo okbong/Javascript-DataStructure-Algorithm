@@ -121,6 +121,27 @@ function BinaryTree()
     }
   }
   
+  this.findLargestButLessThan= function(node, limit, result)
+  {
+    if(node==null)
+      return;
+    
+    console.log(node.value, limit);
+    if(limit==node.value)
+      result.value = node.value;
+    else if(node.value>limit)
+    {
+      if(node.left)
+        this.findLargestButLessThan(node.left, limit,result);
+    }
+    else if(node.value<limit)
+    {
+      result.value = node.value;
+      if(node.right)
+        this.findLargestButLessThan(node.right, limit,result);
+    }
+  }
+  
   this.print= function(node)
   {
     if(node==null)
@@ -139,19 +160,23 @@ function BinaryTree()
 }
 
 var btree=new BinaryTree();
-btree.add(5);
-btree.add(2);
-btree.add(4);
-btree.add(6);
-btree.add(1);
-btree.add(7);
+btree.add(50);
+btree.add(20);
+btree.add(40);
+btree.add(60);
+btree.add(10);
+btree.add(70);
 
 var result={path:''};
 btree.traverseLeft(btree.root,result);
-console.log(result.path);
+//console.log(result.path);
 
 btree.sumify(btree.root);
-btree.print(btree.root);
+//btree.print(btree.root);
+
+var result={};
+btree.findLargestButLessThan(btree.root,63,result);
+console.log('largest number:'+result.value);
 
 
 var node0=new Node(7);
@@ -162,7 +187,6 @@ var node4=new Node(4);
 var node5=new Node(5);
 var node6=new Node(5);
 
-
 var btree2=new BinaryTree();
 btree2.root=node0;
 btree2.root.left=node1;
@@ -172,7 +196,7 @@ btree2.root.right.right=node4;
 btree2.root.left.right=node5;
 btree2.root.right.left=node6;
 
-console.log('isSymmetic:'+btree2.isSymmetric(btree2.root));
+//console.log('isSymmetic:'+btree2.isSymmetric(btree2.root));
 
 
 
