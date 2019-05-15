@@ -47,6 +47,44 @@ function BinaryTree()
     
   }
   
+  this.traverseRight=function(node,pathObj)
+  {
+    if(node==null)
+    {
+      return;
+    }
+    pathObj.path+=node.value+' ';
+    this.traverseRight(node.right,pathObj);
+    this.traverseRight(node.left,pathObj);
+
+  }
+  
+  this.traverseLeft=function(node,pathObj)
+  {
+    if(node==null)
+    {
+      return;
+    }
+    pathObj.path+=node.value+' ';
+    this.traverseLeft(node.left,pathObj);
+    this.traverseLeft(node.right,pathObj);
+  }
+  
+  this.isSymmetric=function(node)
+  {
+    var pathRight={path:''};
+    this.traverseRight(node.right,pathRight);
+    var pathLeft={path:''};
+    this.traverseLeft(node.left,pathLeft);
+    
+    console.log(pathRight.path+'<=>'+pathLeft.path);
+    if(pathRight.path==pathLeft.path)
+      return true;
+    else
+      return false;
+  }
+
+  
   this.sumify=function(node)
   {
     if(node==null)
@@ -107,6 +145,34 @@ btree.add(4);
 btree.add(6);
 btree.add(1);
 btree.add(7);
+
+var result={path:''};
+btree.traverseLeft(btree.root,result);
+console.log(result.path);
+
 btree.sumify(btree.root);
 btree.print(btree.root);
+
+
+var node0=new Node(7);
+var node1=new Node(3);
+var node2=new Node(3);
+var node3=new Node(4);
+var node4=new Node(4);
+var node5=new Node(5);
+var node6=new Node(5);
+
+
+var btree2=new BinaryTree();
+btree2.root=node0;
+btree2.root.left=node1;
+btree2.root.right=node2;
+btree2.root.left.left=node3;
+btree2.root.right.right=node4;
+btree2.root.left.right=node5;
+btree2.root.right.left=node6;
+
+console.log('isSymmetic:'+btree2.isSymmetric(btree2.root));
+
+
 
