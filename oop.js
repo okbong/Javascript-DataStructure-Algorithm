@@ -64,4 +64,5 @@ class Vehicle {
 }
 let bike1 = new Vehicle('Hayabusa', 'Suzuki', '1340cc');
 let bike2 = new Vehicle('Ninja', 'Kawasaki', '998cc');
-console.log(bike1.name);    //Output: Hayabusabike2.start();   //Output: Kawasaki
+console.log(bike1.name);    //Output: Hayabusa
+bike2.start();   //Output: Kawasaki
