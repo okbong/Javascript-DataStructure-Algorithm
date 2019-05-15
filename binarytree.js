@@ -1,6 +1,7 @@
 function Node(value)
 {
   this.value=value;
+  this.sum=0;
   this.left=null;
   this.right=null;
 }
@@ -46,11 +47,47 @@ function BinaryTree()
     
   }
   
+  this.sumify=function(node)
+  {
+    if(node==null)
+      return 0;
+  
+    var tmpval=node.value;
+    
+    node.sum=this.sumify(node.left)+this.sumify(node.right);
+    return node.sum+tmpval;
+    
+  }
+  
+  this.sumify2=function(node)
+  {
+    if(node.left==null && node.right==null)
+    {
+      node.sum=node.value;
+      return node.value;
+    }
+    else if(node.left==null && node.right!=null)
+    {
+      node.sum=this.sumify(node.right)+node.value;
+      return node.sum;
+    }
+    else if(node.left!=null && node.right==null)
+    {
+      node.sum=this.sumify(node.left)+node.value;
+      return node.sum;
+    }
+    else
+    { 
+      node.sum=this.sumify(node.left)+this.sumify(node.right)+node.value;
+      return node.sum;
+    }
+  }
+  
   this.print= function(node)
   {
     if(node==null)
       return;
-    console.log(node.value);
+    console.log(node.value+":"+node.sum);
     if(node.left!=null)
       console.log(node.value+'->left');
     else console.log(node.value+'->left null');
@@ -70,6 +107,6 @@ btree.add(4);
 btree.add(6);
 btree.add(1);
 btree.add(7);
-btree.print(btree.root)
-
+btree.sumify(btree.root);
+btree.print(btree.root);
 
