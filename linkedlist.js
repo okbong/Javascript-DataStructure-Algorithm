@@ -29,6 +29,31 @@ function LinkedList(){
     }
   }
   
+  this.reverse=function()
+  {
+    var previous=this.head;  //1
+    var current=this.head.next  //2
+    var next=this.head.next.next;  //3
+    previous.next=null;    
+    while(next)
+    {
+//      console.log('previous:'+previous.value);    //3
+//      console.log('current:'+current.value);    //3
+//      console.log('next:'+next.value);    //3
+      
+      current.next=previous;
+      previous=current;
+      current=next;
+      next=next.next;
+    }
+//      console.log('previous:'+previous.value);    //3
+//      console.log('current:'+current.value);    //3
+
+    current.next= previous;
+    this.head=current;
+
+  }
+  
   this.print =function()
   {
     var inode=this.head;
@@ -45,7 +70,10 @@ function LinkedList(){
 var link1=new LinkedList();
 link1.add(1);
 link1.add(2);
+link1.add(3);
 link1.add(4);
 link1.add(5);
-link1.add(6);
+link1.print();
+
+link1.reverse();
 link1.print();
